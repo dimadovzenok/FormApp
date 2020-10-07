@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualBasic;
 using System;
-
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,6 +101,15 @@ namespace FormApp
             }
             else if (e.Node.Text == "Teksttask-Textbox")
             {
+                string text;
+                try
+                {
+                    text = File.ReadAllText(path: "text.txt");
+                }
+                catch (FileNotFoundException)
+                {
+                    text = "tekst puudub";
+                }
                 txt_box = new TextBox();
                 txt_box.Multiline = true;
                 txt_box.Text = "Failist";
@@ -126,9 +135,13 @@ namespace FormApp
                 page1 = new TabPage("Esimine");
                 page2 = new TabPage("Teine");
                 page3 = new TabPage("Kolmas");
+                page1.BackColor = Color.Green;
+                page2.BackColor = Color.Blue;
+                page3.BackColor = Color.Yellow;
                 tabcontrol.Controls.Add(page1);
                 tabcontrol.Controls.Add(page2);
                 tabcontrol.Controls.Add(page3);
+                
                 this.Controls.Add(tabcontrol);
             }
             else if (e.Node.Text == "Messagebox")
